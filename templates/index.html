@@ -1,0 +1,58 @@
+<!doctype>
+<html>
+
+	<head>
+		<style>
+			.imageContainer{
+				position: relative;
+				display: inline-block;
+				width: 300px;
+				height: 300px;
+				border: 1px solid black;
+			}
+			.imageContainer img {
+
+
+				max-width: 100%;
+				max-height: 100%;
+			}
+
+		</style>
+	</head>
+
+
+		<title>Hello from Flask</title>
+		{% if name %}
+		  <h1>Hello {{ name }}!</h1>
+		{% else %}
+		  <h1>Hello World!</h1>
+		{% endif %}
+
+
+	<div> vote = {{ vote }} </div>
+
+
+	<body>
+		<div class="imageContainer">
+		<img id="selfieImg" src="{{ selfieImage }}" />
+	</div>
+
+
+		<div class="imageContainer">
+		<img id="comparisonImg" src="{{ comparisonImage }}" />
+	</div>
+
+
+	<form method="POST" action="/vote">
+		<input type="hidden" name="selfieID" value="{{selfieID}}" />
+		<input type="hidden" name="imageID" value="{{imageID}}" />
+
+
+		<input type="submit" name="vote" value="yes" />
+		<input type="submit" name="vote" value="no" />
+	</form>
+
+
+
+	</body>
+</html>
