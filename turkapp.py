@@ -4,10 +4,13 @@ import sqlite3
 
 
 
+
 app = Flask(__name__)
 
 
 DATABASE = '/Users/justinharvey/turkserver/sqlite/turk.db'
+
+counter = 0
 
 
 # Load default config and override config from an environment variable
@@ -46,26 +49,30 @@ def close_db(error):
 
 @app.route('/vote', methods=["POST"])
 def submit_vote():
-	render_template('index.html', vote=request.form['vote'])
 
-	increment = 0
+    global counter 
+    render_template('index.html', vote=request.form['vote'])
 
-	if (request.form['vote'] == "no"):
-		pass
+    increment = 0
 
-	if (request.form['vote'] == "yes"):
-		increment =1
+    if (request.form['vote'] == "no"):
+        pass
 
+    if (request.form['vote'] == "yes"):
+        increment =1
 
-	db = get_db()
+    db = get_db()
+    query = 'update votes set votes = votes + 1, score = score + %d where imageID="%s" and selfieID=%s ' %(increment, request.form["imageID"], request.form["selfieID"])
+    cur = db.execute(query)
+    db.commit()
 
-	query = 'update votes set votes = votes + 1, score = score + %d where imageID="%s" and selfieID=%s ' %(increment, request.form["imageID"], request.form["selfieID"])
+    counter = counter + 1
 
-	cur = db.execute(query)
+    if (counter < 10): 
+	   return redirect(url_for('show_entries'))
 
-	db.commit()
-
-	return redirect(url_for('show_entries'))
+    else: 
+        return ("All done. Thank you!")
 
 
 

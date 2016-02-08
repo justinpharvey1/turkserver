@@ -1,2 +1,0 @@
-# turkserver
-mechanical turk server

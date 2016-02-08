@@ -1,7 +1,4 @@
-<!doctype>
-<html>
 
-	<head>
 		<style>
 			.imageContainer{
 				position: relative;
@@ -11,12 +8,9 @@
 				border: 1px solid black;
 			}
 			.imageContainer img {
-
-
 				max-width: 100%;
 				max-height: 100%;
 			}
-
 		</style>
 	</head>
 
@@ -25,11 +19,19 @@
 		{% if name %}
 		  <h1>Hello {{ name }}!</h1>
 		{% else %}
-		  <h1>Hello World!</h1>
+		  <h1>Do these images show the same person?</h1>
 		{% endif %}
 
 
-	<div> vote = {{ vote }} </div>
+<form method="POST" action="/vote">
+		<input type="hidden" name="selfieID" value="{{selfieID}}" />
+		<input type="hidden" name="imageID" value="{{imageID}}" />
+
+
+		<input type="submit" name="vote" value="yes" />
+		<input type="submit" name="vote" value="no" />
+	</form>
+
 
 
 	<body>
@@ -43,16 +45,7 @@
 	</div>
 
 
-	<form method="POST" action="/vote">
-		<input type="hidden" name="selfieID" value="{{selfieID}}" />
-		<input type="hidden" name="imageID" value="{{imageID}}" />
-
-
-		<input type="submit" name="vote" value="yes" />
-		<input type="submit" name="vote" value="no" />
-	</form>
-
-
+	
 
 	</body>
 </html>
