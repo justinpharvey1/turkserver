@@ -74,7 +74,7 @@ def show_entries():
     global db
     cursor = db.cursor()
     cursor.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
-    
+    cursor.close()
 
 
     for  imageID, selfieID, imageURL, selfieURL in cursor: 
@@ -85,7 +85,7 @@ def show_entries():
 
     #return("hello world")
 
-    cursor.close()
+
 
     return "hello world"
 
