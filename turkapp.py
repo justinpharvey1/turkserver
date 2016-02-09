@@ -52,7 +52,7 @@ def submit_vote():
     
     query = 'update votes set votes = votes + 1, score = score + %d where imageID="%s" and selfieID=%s ' %(increment, request.form["imageID"], request.form["selfieID"])
     cursor = db.cursor()
-    cur.execute(query)
+    cursor.execute(query)
     db.commit()
     cursor.close()
 
