@@ -12,7 +12,6 @@ app = Flask(__name__)
 
 counter = 0
 
-db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
 
 
 
@@ -37,7 +36,10 @@ def close_db(error):
 @app.route('/vote', methods=["POST"])
 def submit_vote():
 
-    global db
+    db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
+
+
+    #global db
     global counter 
     render_template('index.html', vote=request.form['vote'])
 
@@ -71,7 +73,9 @@ def submit_vote():
 
 @app.route('/')
 def show_entries():
-    global db
+    #global db
+    db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
+
     cursor = db.cursor()
     cursor.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
     cursor.close()
