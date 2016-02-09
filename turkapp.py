@@ -28,7 +28,10 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 @app.teardown_appcontext
 def close_db(error):
-    db.close()
+    if db1:
+        db1.close()
+    if db2:
+        db2.close()
 
 
 
@@ -84,7 +87,7 @@ def show_entries():
 
         return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
 
-    cursor.close()
+    cursor1.close()
 
     #return("hello world")
 
