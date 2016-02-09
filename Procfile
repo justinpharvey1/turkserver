@@ -1,1 +1,1 @@
-web: gunicorn turkapp.py:app
+web: gunicorn turkapp:app
