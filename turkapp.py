@@ -10,41 +10,26 @@ import MySQLdb
 app = Flask(__name__)
 
 
-DATABASE = '/Users/justinharvey/turkserver/sqlite/turk.db'
-
 counter = 0
+
+db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com:3306", user="turkusername", passwd="turkpassword", db="turkdb")
+
 
 
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE='/Users/justinharvey/turkserver/sqlite/turk.db',
-    DEBUG=True,
+    DEBUG=True
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 
-def connect_db():
-    """Connects to the specific database."""
-    rv = sqlite3.connect(app.config['DATABASE'])
-    rv.row_factory = sqlite3.Row
-    return rv
 
-
-def get_db():
-    """Opens a new database connection if there is none yet for the
-    current application context.
-    """
-    if not hasattr(g, 'sqlite_db'):
-        g.sqlite_db = connect_db()
-    return g.sqlite_db
 
 
 @app.teardown_appcontext
 def close_db(error):
-    """Closes the database again at the end of the request."""
-    if hasattr(g, 'sqlite_db'):
-        g.sqlite_db.close()
+    db.close()
 
 
 
@@ -52,6 +37,7 @@ def close_db(error):
 @app.route('/vote', methods=["POST"])
 def submit_vote():
 
+    global db
     global counter 
     render_template('index.html', vote=request.form['vote'])
 
@@ -63,9 +49,10 @@ def submit_vote():
     if (request.form['vote'] == "yes"):
         increment =1
 
-    db = get_db()
+    
     query = 'update votes set votes = votes + 1, score = score + %d where imageID="%s" and selfieID=%s ' %(increment, request.form["imageID"], request.form["selfieID"])
-    cur = db.execute(query)
+    cur = db.cursor()
+    cur.execute(query)
     db.commit()
 
     counter = counter + 1
@@ -83,8 +70,9 @@ def submit_vote():
 
 @app.route('/')
 def show_entries():
-    #db = get_db()
-    #cur = db.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
     #entries = cur.fetchall()
     #fetch one?^^^
 
