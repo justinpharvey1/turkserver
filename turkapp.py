@@ -54,6 +54,7 @@ def submit_vote():
     cursor = db.cursor()
     cur.execute(query)
     db.commit()
+    cursor.close()
 
     counter = counter + 1
 
@@ -82,12 +83,11 @@ def show_entries():
 
 
 
-    return("hello world")
-
-
-    #print(entries)
     #return("hello world")
-    #return render_template('show_entries.html', entries=entries)
+
+    cursor.close()
+
+    return render_template('show_entries.html', entries=entries)
 
 
 
