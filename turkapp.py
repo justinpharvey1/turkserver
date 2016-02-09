@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 counter = 0
 
-db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com:3306", user="turkusername", passwd="turkpassword", db="turkdb")
+db = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
 
 
 
