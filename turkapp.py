@@ -74,7 +74,7 @@ def submit_vote():
 def show_entries():
   
     db1 = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
-    cursor1 = db.cursor()
+    cursor1 = db1.cursor()
     cursor1.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
     cursor1.close()
     db1.close()
