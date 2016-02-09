@@ -80,7 +80,7 @@ def show_entries():
     db1.close()
 
 
-    for  imageID, selfieID, imageURL, selfieURL in cursor: 
+    for  imageID, selfieID, imageURL, selfieURL in cursor1: 
 
         return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
 
