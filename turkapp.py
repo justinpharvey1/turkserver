@@ -22,7 +22,7 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
 
-def connect_db():
+#def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
@@ -81,15 +81,15 @@ def submit_vote():
 
 @app.route('/')
 def show_entries():
-    db = get_db()
-    cur = db.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
-    entries = cur.fetchall()
+    #db = get_db()
+    #cur = db.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
+    #entries = cur.fetchall()
     #fetch one?^^^
 
 
-    for  imageID, selfieID, imageURL, selfieURL in entries: 
+    #for  imageID, selfieID, imageURL, selfieURL in entries: 
 
-    	 return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
+    	# return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
 
 
 
