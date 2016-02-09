@@ -87,7 +87,7 @@ def show_entries():
 
     cursor.close()
 
-    return render_template('show_entries.html', entries=entries)
+    return "hello world"
 
 
 
