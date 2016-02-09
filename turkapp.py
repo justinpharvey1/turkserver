@@ -70,7 +70,7 @@ def submit_vote():
 
 @app.route('/')
 def show_entries():
-    db = get_db()
+    global db
     cursor = db.cursor()
     cursor.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
     #entries = cur.fetchall()
