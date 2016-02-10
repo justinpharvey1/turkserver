@@ -63,7 +63,7 @@ def submit_vote():
 	   return redirect(url_for('show_entries'))
 
     else: 
-        return ("All done. Thank you!")
+        return ("All done. Thank you! Your survey code is SG16")
 
 
 
