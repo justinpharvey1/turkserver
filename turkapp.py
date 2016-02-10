@@ -63,6 +63,7 @@ def submit_vote():
 	   return redirect(url_for('show_entries'))
 
     else: 
+        counter = 0
         return ("All done. Thank you! Your survey code is SG16")
 
 
@@ -72,7 +73,8 @@ def submit_vote():
 
 @app.route('/')
 def show_entries():
-  
+
+
     db1 = MySQLdb.connect(host="turkdbs.cea2xgnpufud.us-east-1.rds.amazonaws.com", user="turkusername", passwd="turkpassword", db="turkdb")
     cursor1 = db1.cursor()
     cursor1.execute('select  image.imageID as imageID, votes.selfieID as selfieID, image.imageURL as imageURL, selfie.imageURL as selfieURL from votes join images image on image.imageID = votes.imageID and image.imageType = "image" join images selfie on selfie.imageID = votes.selfieID and selfie.imageType = "selfie" order by votes.votes limit 1')
