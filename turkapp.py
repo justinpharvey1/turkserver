@@ -84,7 +84,8 @@ def show_entries():
 
     for  imageID, selfieID, imageURL, selfieURL in cursor1: 
 
-        return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
+        #return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
+        return render_template('index2.html',comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID ,imageset = cursor1)
 
     cursor1.close()
 
