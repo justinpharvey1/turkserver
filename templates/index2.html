@@ -34,24 +34,34 @@
 
 
 
+
+
+
 	<body>
 
-	
+
   	{% for imageID, selfieID, imageURL, selfieURL in imageset %}
 			
-			<h1>"{{selfieURL}}"</h1>
+
+
+		<div id="imagescontainer">
+
 			<div class="imageContainer">
-				<img id="selfieID" src="{{ selfieURL }}" />
+				<img id="selfieImg" src="{{ selfieURL }}" />
 			</div>
-						 
+
+			<div class="imageContainer">
+				<img id="comparisonImg" src="{{ imageURL }}" />
+			</div>
+
+		</div>
+				
+
+
 	{% else %}
-    		<li><em>Unbelievable.  No entries here so far</em>
+    		<li><em>Nothing to tag, but its not your fault! Use code SG16 to complete the job, and we will still pay you. Thanks!</em>
   	{% endfor %}
 
-
-
-	
-	
 
 	</body>
 </html>
