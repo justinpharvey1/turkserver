@@ -81,11 +81,13 @@ def show_entries():
     cursor1.close()
     db1.close()
 
+    return render_template('index2.html', imageset = cursor1)
 
-    for  imageID, selfieID, imageURL, selfieURL in cursor1: 
+
+
+    #for  imageID, selfieID, imageURL, selfieURL in cursor1: 
 
         #return render_template('index.html', comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID )
-        return render_template('index2.html',comparisonImage=imageURL, selfieImage=selfieURL, imageID=imageID, selfieID=selfieID ,imageset = cursor1)
 
     cursor1.close()
 
