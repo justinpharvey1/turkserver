@@ -36,15 +36,15 @@
 
 	<body>
 
-	<ul class=cursor1>
-  		{% for imageID, selfieID, imageURL, selfieURL in cursor1 %}
+	
+  	{% for imageID, selfieID, imageURL, selfieURL in cursor1 %}
 			
-				<h1>selfieURL</h1>
+			<h1>selfieURL</h1>
 						 
-		{% else %}
-    			<li><em>Unbelievable.  No entries here so far</em>
-  			{% endfor %}
-  	</ul>
+	{% else %}
+    		<li><em>Unbelievable.  No entries here so far</em>
+  	{% endfor %}
+
 
 
 	
